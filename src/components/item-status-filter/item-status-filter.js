@@ -3,8 +3,7 @@ import React, {Component} from "react";
 import './item-status-filter.css';
 
 export default class ItemStatusFilter extends Component{
-
-    render() {
+  render() {
       return (
           <div className="btn-group">
               <button type="button"
