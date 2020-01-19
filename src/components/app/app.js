@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 
 import AppHeader from "../app-header";
 import SearchPanel from "../search-panel";
@@ -6,28 +6,21 @@ import TodoList from "../todo-list";
 import ItemStatusFilter from '../item-status-filter';
 
 import './app.css';
+import Context from "../../context";
 
-export default class App extends Component{
-    state = {
-        todoList: [
-        {label: 'Drink coffee', important: false, id: 1},
-        {label: 'Have a lunch', important: false, id: 2},
-        {label: 'Go to the job', important: true, id: 3},
-        ]
-    };
+function App() {
+        const [todoList, setTodos] = useState([
+                {label: 'Drink coffee', id: 1},
+                {label: 'Have a lunch', id: 2},
+                {label: 'Go to the job', id: 3},
+        ]);
 
-    onDelete = (id) => {
-      this.setState(({todoList}) => {
-         const idx = todoList.findIndex(item => item.id === id);
-         return {
-             todoList: [...todoList.slice(0, idx), ...todoList.slice(idx + 1)]
-         };
-      });
-    };
+    function onDelete(id){
+        setTodos((todoList) => todoList.filter(todo => todo.id !== id));
+    }
 
-    render() {
-        let {todoList} = this.state;
-        return(
+    return(
+        <Context.Provider value={{onDelete}}>
             <div className="todo-app">
                 <AppHeader toDo={1} done={3}/>
 
@@ -38,9 +31,10 @@ export default class App extends Component{
 
                 <TodoList
                     todos={todoList}
-                    onDelete={this.onDelete}
                 />
             </div>
-        )
-    };
-};
+        </Context.Provider>
+    )
+}
+
+export default App
