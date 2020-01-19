@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 import './item-status-filter.css';
 
-const ItemStatusFilter = () => {
+function ItemStatusFilter() {
     return (
       <div className="btn-group">
           <button type="button"

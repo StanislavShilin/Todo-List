@@ -3,7 +3,7 @@ import React, {useContext, useState} from "react";
 import './todo-list-item.css';
 import Context from "../../context";
 
-function TodoListItem({label, id}){
+function TodoListItem({label, id}) {
     const [done, setDone] = useState(false);
     const [important, setImportant] = useState(false);
     const {onDelete} = useContext(Context);
